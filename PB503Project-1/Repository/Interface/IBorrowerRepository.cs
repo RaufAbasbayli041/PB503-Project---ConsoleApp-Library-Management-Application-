@@ -9,5 +9,7 @@ namespace PB503Project_1.Repository.Interface
 {
     public interface IBorrowerRepository : IGenericRepository<Borrower>
     {
+        List<Borrower> GetAllByInclude();
+        Borrower? GetByIdInclude(int id);
     }
 }

@@ -16,48 +16,66 @@ namespace PB503Project_1.Services.Implementation
         public void CreateAuthor(Author author)
         {
 
-            if (author is null) throw new NullExceptions("author not found");
-            if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null or empty");
+            if (author is null) throw new NullExceptions("author cannot be null");
+            if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null");
 
             IAuthorRepository authorRepository = new AuthorRepository();
             authorRepository.Create(author);
-            
+
         }
 
         public void DeleteAuthor(int id)
         {
-            if (id < 0) throw new InvalidException("punlished year cannot be less than 0");
+            if (id < 0) throw new NotFound("author not found");
             IAuthorRepository authorRepository = new AuthorRepository();
-            authorRepository.Delete(id);
-          
+            var data = authorRepository.GetById(id);
+            if (data is null) throw new NotFound("author not found");
+            authorRepository.Delete(data);
+            authorRepository.Commit();
+
+            if (data.IsDeleted is true) throw new DeletedException("author has deleted");
+
         }
 
         public List<Author> GetAllAuthors()
         {
             IAuthorRepository authorRepository = new AuthorRepository();
-            return authorRepository.GetAll();
-
+            var datas = authorRepository.GetAll();
+            foreach (var data in datas)
+            {
+                Console.WriteLine($"Author Id -{data.Id}; " +
+                    $"Author name - {data.Name};" +
+                    $"author books - {data.Books}" +
+                    $"author Created date - {data.CreatedDate};" +
+                    $"author updated date - {data.UpdatedDate};") ;
+            }
+            return datas;
         }
 
         public Author GetAuthorById(int id)
         {
-            if (id < 0) throw new InvalidException("punlished year cannot be less than 0");
-            IAuthorRepository authorRepository = new AuthorRepository(); return authorRepository.GetById(id);
+            if (id < 0) throw new NotFound("author not found");
+            IAuthorRepository authorRepository = new AuthorRepository();
+            return authorRepository.GetById(id);
         }
 
         public void UpdateAuthor(int id, Author author)
         {
-            if (id < 0) throw new InvalidException("punlished year cannot be less than 0");
-            if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null or empty");
+            if (id < 0) throw new NotFound("author not found");
+            if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null");
+            if (author is null) throw new NullExceptions("author cannot be null");
+
 
 
             IAuthorRepository authorRepository = new AuthorRepository();
             var existAuthor = authorRepository.GetById(id);
-            if (existAuthor is null) throw new NullExceptions("exist book cannot be null");
+            if (existAuthor is null) throw new NullExceptions("author cannot be null");
 
             existAuthor.Name = author.Name;
             existAuthor.UpdatedDate = DateTime.UtcNow.AddHours(4);
-      
+            authorRepository.Commit();
+
+
 
         }
     }

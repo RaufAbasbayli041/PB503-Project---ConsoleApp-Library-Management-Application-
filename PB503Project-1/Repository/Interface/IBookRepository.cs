@@ -9,5 +9,7 @@ namespace PB503Project_1.Repository.Interface
 {
     public interface IBookRepository : IGenericRepository<Book>
     {
+        List<Book> GetAllByInclude();
+        Book? GetByIdInclude(int id);
     }
 }

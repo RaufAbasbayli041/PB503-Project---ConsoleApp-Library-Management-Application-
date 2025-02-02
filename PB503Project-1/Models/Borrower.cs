@@ -10,7 +10,7 @@ namespace PB503Project_1.Models
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public int BookId { get; set; }
+       
         public List<Loan> Loans { get; set; }       
     }
 }

@@ -15,6 +15,8 @@ namespace PB503Project_1.Models
         public DateTime ReturnDate { get; set; }
         public List<LoanItem> LoanItems { get; set; }
 
+       
+
 
     }
 }

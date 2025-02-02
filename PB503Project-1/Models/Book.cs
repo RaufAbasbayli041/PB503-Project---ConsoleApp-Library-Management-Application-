@@ -12,8 +12,7 @@ namespace PB503Project_1.Models
         public string Desc { get; set; }
         public int PublishedYear { get; set; }
         public List<Author> Authors { get; set; }
-        public int LoanItemId { get; set; }
-        public LoanItem LoanItem { get; set; }
+       
 
     }
 }

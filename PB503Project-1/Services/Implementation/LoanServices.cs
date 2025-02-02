@@ -15,43 +15,52 @@ namespace PB503Project_1.Services.Implementation
     {
         public void CreateLoan(Loan loan)
         {
-            if (loan is null) throw new NullExceptions("borrower not found");
-
+            if (loan is null) throw new NullExceptions("loan cannot be null");
             ILoanRepository loanRepository = new LoanRepository();
             loan.CreatedDate = DateTime.UtcNow.AddHours(4);
             loan.LoanDate = loan.CreatedDate;
             loanRepository.Create(loan);
-            
         }
 
         public void DeleteLoan(int id)
         {
-            if (id < 0) throw new InvalidException("loan id cannot be less than 0");
+            if (id < 0) throw new NotFound("loan not found");
             ILoanRepository loanRepo = new LoanRepository();
-              loanRepo.Delete(id);
-            
+            var data = loanRepo.GetById(id);
+            if (data is null) throw new NullExceptions("loan cannot be null");
+            loanRepo.Delete(data);
+            loanRepo.Commit();
+            if (data.IsDeleted is true) throw new DeletedException("loan has deleted");
         }
 
         public List<Loan> GetAllLoans()
         {
             ILoanRepository loanRepo = new LoanRepository();
-            return loanRepo.GetAll();
+            var datas = loanRepo.GetAll();
+            foreach (var data in datas)
+            {
+                Console.WriteLine($"loan Id - {data.Id};" +
+                    $"loan Created date - {data.CreatedDate}; " +
+                    $"loan updated date - {data.UpdatedDate}; " +
+                    $"loan's borrower - {data.Borrowers}");
+            }
+            return datas;
         }
 
         public Loan GetBLoanById(int id)
         {
-            if (id < 0) throw new InvalidException("loan id cannot be less than 0");
+            if (id < 0) throw new NotFound("loan not found");
             ILoanRepository loanRepo = new LoanRepository();
             return loanRepo.GetById(id);
         }
 
         public void UpdateLoan(int id, Loan loan)
         {
-            if (id < 0) throw new InvalidException("loan id cannot be less than 0");
-            if (loan is null) throw new NullExceptions("borrower not found");
+            if (id < 0) throw new NotFound("loan not found");
+            if (loan is null) throw new NullExceptions("loan cannot be null");
             ILoanRepository loanRepo = new LoanRepository();
             var exsistLoan = loanRepo.GetById(id);
-            if (exsistLoan == null) throw new NullExceptions("exist loan cannot be null");
+            if (exsistLoan == null) throw new NullExceptions("loan cannot be null");
             exsistLoan.UpdatedDate = DateTime.UtcNow.AddHours(4);
             loanRepo.Commit();
 

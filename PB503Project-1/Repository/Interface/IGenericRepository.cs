@@ -10,7 +10,7 @@ namespace PB503Project_1.Repository.Interface
     public interface IGenericRepository<T> where T : BaseEntity, new()
     {
         void Create(T entity);
-        void Delete(int id);
+        void Delete(T entity);
         T GetById(int id);
         List<T> GetAll();
         int Commit();

@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\services\\implementation\\loanservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\services\\implementation\\loanservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\services\\interface\\iborrowerservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\services\\interface\\iborrowerservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\services\\implementation\\borrowerservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\services\\implementation\\borrowerservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\repository\\implementations\\genericrepostory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\repository\\implementations\\genericrepostory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\models\\loan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\models\\loan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\services\\interface\\iloanservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\services\\interface\\iloanservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\services\\implementation\\authorservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|solutionrelative:pb503project-1\\services\\implementation\\authorservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9330262A-B4B9-4E4F-AB59-0487DD1F396E}|PB503Project-1\\PB503Project-1.csproj|c:\\users\\asus\\desktop\\code academy\\entityframeworkcore\\project 01.02.2025\\pb503project-1\\pb503project-1\\services\\implementation\\bookservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,19 +22,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Loan.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Models\\Loan.cs",
-              "RelativeDocumentMoniker": "PB503Project-1\\Models\\Loan.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Models\\Loan.cs",
-              "RelativeToolTip": "PB503Project-1\\Models\\Loan.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Program.cs",
+              "RelativeDocumentMoniker": "PB503Project-1\\Program.cs",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Program.cs",
+              "RelativeToolTip": "PB503Project-1\\Program.cs",
+              "ViewState": "AQIAALMAAAAAAAAAAAAAwBQBAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T18:31:28.643Z",
+              "WhenOpened": "2025-02-02T17:25:38.19Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -59,80 +44,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoanServices.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\LoanServices.cs",
-              "RelativeDocumentMoniker": "PB503Project-1\\Services\\Implementation\\LoanServices.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\LoanServices.cs",
-              "RelativeToolTip": "PB503Project-1\\Services\\Implementation\\LoanServices.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAYwC4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T18:21:13.272Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IBorrowerServices.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Interface\\IBorrowerServices.cs",
-              "RelativeDocumentMoniker": "PB503Project-1\\Services\\Interface\\IBorrowerServices.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Interface\\IBorrowerServices.cs",
-              "RelativeToolTip": "PB503Project-1\\Services\\Interface\\IBorrowerServices.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T18:19:59.174Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IloanServices.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Interface\\IloanServices.cs",
-              "RelativeDocumentMoniker": "PB503Project-1\\Services\\Interface\\IloanServices.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Interface\\IloanServices.cs",
-              "RelativeToolTip": "PB503Project-1\\Services\\Interface\\IloanServices.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T18:19:12.221Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GenericRepostory.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Repository\\Implementations\\GenericRepostory.cs",
-              "RelativeDocumentMoniker": "PB503Project-1\\Repository\\Implementations\\GenericRepostory.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Repository\\Implementations\\GenericRepostory.cs",
-              "RelativeToolTip": "PB503Project-1\\Repository\\Implementations\\GenericRepostory.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwCAAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T15:43:56.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "BorrowerServices.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\BorrowerServices.cs",
-              "RelativeDocumentMoniker": "PB503Project-1\\Services\\Implementation\\BorrowerServices.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\BorrowerServices.cs",
-              "RelativeToolTip": "PB503Project-1\\Services\\Implementation\\BorrowerServices.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAuwBsAAABYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T15:23:53.062Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "BookServices.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\BookServices.cs",
               "RelativeDocumentMoniker": "PB503Project-1\\Services\\Implementation\\BookServices.cs",
               "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\BookServices.cs",
               "RelativeToolTip": "PB503Project-1\\Services\\Implementation\\BookServices.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAAgwEAAAAANAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAgwEQAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T15:32:11.788Z"
+              "WhenOpened": "2025-02-02T17:46:47.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthorServices.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\AuthorServices.cs",
+              "RelativeDocumentMoniker": "PB503Project-1\\Services\\Implementation\\AuthorServices.cs",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\Code Academy\\EntityFrameworkCore\\Project 01.02.2025\\PB503Project-1\\PB503Project-1\\Services\\Implementation\\AuthorServices.cs",
+              "RelativeToolTip": "PB503Project-1\\Services\\Implementation\\AuthorServices.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAADEAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T17:44:49.93Z",
+              "EditorCaption": ""
             }
           ]
         }

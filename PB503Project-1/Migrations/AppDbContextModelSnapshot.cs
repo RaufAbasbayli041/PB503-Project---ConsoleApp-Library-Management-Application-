@@ -45,12 +45,18 @@ namespace PB503Project_1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -65,15 +71,15 @@ namespace PB503Project_1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Desc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<int>("LoanItemId")
-                        .HasColumnType("int");
 
                     b.Property<int>("PublishedYear")
                         .HasColumnType("int");
@@ -82,9 +88,10 @@ namespace PB503Project_1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("LoanItemId");
+                    b.HasKey("Id");
 
                     b.ToTable("Books");
                 });
@@ -97,8 +104,8 @@ namespace PB503Project_1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -110,6 +117,9 @@ namespace PB503Project_1.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -127,17 +137,23 @@ namespace PB503Project_1.Migrations
                     b.Property<int>("BorrowerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateOnly>("LoanDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("LoanDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateOnly>("MustReturnDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("MustReturnDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateOnly>("ReturnDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -154,13 +170,24 @@ namespace PB503Project_1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("LoanId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("LoanId");
 
@@ -182,17 +209,6 @@ namespace PB503Project_1.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PB503Project_1.Models.Book", b =>
-                {
-                    b.HasOne("PB503Project_1.Models.LoanItem", "LoanItem")
-                        .WithMany()
-                        .HasForeignKey("LoanItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LoanItem");
-                });
-
             modelBuilder.Entity("PB503Project_1.Models.Loan", b =>
                 {
                     b.HasOne("PB503Project_1.Models.Borrower", "Borrowers")
@@ -206,11 +222,19 @@ namespace PB503Project_1.Migrations
 
             modelBuilder.Entity("PB503Project_1.Models.LoanItem", b =>
                 {
+                    b.HasOne("PB503Project_1.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PB503Project_1.Models.Loan", "Loan")
                         .WithMany("LoanItems")
                         .HasForeignKey("LoanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Book");
 
                     b.Navigation("Loan");
                 });

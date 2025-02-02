@@ -9,5 +9,7 @@ namespace PB503Project_1.Repository.Interface
 {
     public interface IAuthorRepository : IGenericRepository<Author>
     {
+        List<Author> GetAllByInclude();
+        Author? GetByIdInclude(int id);
     }
 }

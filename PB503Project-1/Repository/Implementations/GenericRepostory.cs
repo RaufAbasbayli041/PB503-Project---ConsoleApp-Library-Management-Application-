@@ -21,18 +21,14 @@ namespace PB503Project_1.Repository.Implementations
         {
             _appDbContext.Set<T>().Add(entity);
             entity.CreatedDate = DateTime.UtcNow.AddHours(4);
-            entity.UpdatedDate= entity.CreatedDate  ;
+            entity.UpdatedDate = entity.CreatedDate;
 
-            Commit();
+            _appDbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(T entity)
         {
-            var data = _appDbContext.Set<T>().FirstOrDefault(x => x.Id == id);
-            data.IsDeleted = true;
-            
-          _appDbContext.Remove(data);
-            _appDbContext.SaveChanges();
+            entity.IsDeleted = true;
         }
 
         public T GetById(int id)
@@ -42,7 +38,7 @@ namespace PB503Project_1.Repository.Implementations
 
         public List<T> GetAll()
         {
-            return _appDbContext.Set<T>().ToList();
+            return _appDbContext.Set<T>().Where(x=>!x.IsDeleted ).ToList();
         }
 
 
