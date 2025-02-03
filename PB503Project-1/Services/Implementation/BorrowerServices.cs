@@ -19,6 +19,23 @@ namespace PB503Project_1.Services.Implementation
             if (string.IsNullOrWhiteSpace(borrower.Name)) throw new NullExceptions("borrower cannot be null");
             if (borrower.Name is null) throw new NullExceptions(" borrower cannot be null");
             if (borrower.Email is null) throw new NullExceptions(" borrower cannot be null");
+            foreach (var a in borrower.Name)
+            {
+                if (!char.IsDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
+            foreach (var a in borrower.Email)
+            {
+                if (!char.IsLetterOrDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
+         
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
             borrowerRepository.Create(borrower);
         }
@@ -64,6 +81,23 @@ namespace PB503Project_1.Services.Implementation
             if (string.IsNullOrWhiteSpace(borrower.Name)) throw new NullExceptions("borrower cannot be null");
             if (borrower.Name is null) throw new NullExceptions(" borrower cannot be null");
             if (borrower.Email is null) throw new NullExceptions(" borrower cannot be null");
+            foreach (var a in borrower.Name)
+            {
+                if (!char.IsDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
+            foreach (var a in borrower.Email)
+            {
+                if (!char.IsLetterOrDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
+
 
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
             var existBorrower = borrowerRepository.GetById(id);

@@ -18,6 +18,14 @@ namespace PB503Project_1.Services.Implementation
 
             if (author is null) throw new NullExceptions("author cannot be null");
             if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null");
+            foreach (var a in author.Name)
+            {
+                if (!char.IsDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
 
             IAuthorRepository authorRepository = new AuthorRepository();
             authorRepository.Create(author);
@@ -43,7 +51,7 @@ namespace PB503Project_1.Services.Implementation
             var datas = authorRepository.GetAll();
             foreach (var data in datas)
             {
-                Console.WriteLine($"Author Id -{data.Id}; " +
+                Console.WriteLine($"Author Id - {data.Id}; " +
                     $"Author name - {data.Name};" +
                     $"author books - {data.Books}" +
                     $"author Created date - {data.CreatedDate};" +
@@ -64,7 +72,14 @@ namespace PB503Project_1.Services.Implementation
             if (id < 0) throw new NotFound("author not found");
             if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null");
             if (author is null) throw new NullExceptions("author cannot be null");
+            foreach (var a in author.Name)
+            {
+                if (!char.IsDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
 
+                }
+            }
 
 
             IAuthorRepository authorRepository = new AuthorRepository();

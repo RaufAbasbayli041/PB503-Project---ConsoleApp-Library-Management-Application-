@@ -17,36 +17,51 @@ namespace PB503Project_1.Services.Implementation
         public void CreateBook(Book book)
         {
             if (book is null) throw new NullExceptions("book cannot be null");
+
             if (string.IsNullOrWhiteSpace(book.Title)) throw new NullExceptions("book cannot be null");
             if (string.IsNullOrWhiteSpace(book.Desc)) throw new NullExceptions("book cannot be null");
-            if (book.PublishedYear < 0) throw new NotFound("punlished year cannot be less than 0");           
+            if (book.PublishedYear < 0) throw new NotFound("punlished year cannot be less than 0");
+            foreach (var a in book.Desc)
+            {
+                if (!char.IsLetterOrDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+                    
+                }
+            }
+            foreach (var a in book.Title)
+            {
+                if (!char.IsLetterOrDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
 
             IBookRepository bookRepository = new BookRepository();
             bookRepository.Create(book);
-          
+
         }
 
         public void DeleteBook(int id)
         {
             if (id < 0) throw new NotFound("book not found");
             IBookRepository bookRepository = new BookRepository();
-           var data = bookRepository.GetById(id);
-            if (data is null) throw new NullExceptions("book cannot be null");
+            var data = bookRepository.GetById(id);
+            if (data is null) throw new NullExceptions("enter id");
+            if (data.IsDeleted is true) throw new DeletedException("book has deleted");
             bookRepository.Delete(data);
             bookRepository.Commit();
-
-            if (data.IsDeleted is true) throw new DeletedException("book has deleted");
-
         }
 
         public List<Book> GetAllBooks()
         {
-            IBookRepository bookRepository= new BookRepository();
+            IBookRepository bookRepository = new BookRepository();
             var datas = bookRepository.GetAll();
             foreach (var data in datas)
             {
                 Console.WriteLine($"Book Id - {data.Id};" +
-                    $"Book title - {data.Title}" +
+                    $"Book title - {data.Title};" +
                     $"book descriotion - {data.Desc};" +
                     $"book Created date - {data.CreatedDate}; " +
                     $"book updated date - {data.UpdatedDate}; " +
@@ -54,7 +69,7 @@ namespace PB503Project_1.Services.Implementation
                     $"author - {data.Authors}");
             }
             return datas;
-           
+
         }
 
         public Book GetBookById(int id)
@@ -71,14 +86,30 @@ namespace PB503Project_1.Services.Implementation
             if (string.IsNullOrWhiteSpace(book.Title)) throw new NullExceptions("book cannot be null");
             if (string.IsNullOrWhiteSpace(book.Desc)) throw new NullExceptions("book cannot be null");
             if (book.PublishedYear < 0) throw new NotFound("punlished year cannot be less than 0");
+            foreach (var a in book.Desc)
+            {
+                if (!char.IsLetterOrDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
 
+                }
+            }
+            foreach (var a in book.Title)
+            {
+                if (!char.IsLetterOrDigit(a))
+                {
+                    throw new InvalidException("incorrect format");
+
+                }
+            }
 
             IBookRepository bookRepository = new BookRepository();
             var existBook = bookRepository.GetById(id);
             if (existBook is null) throw new NullExceptions("book cannot be null");
             existBook.Title = book.Title;
-            existBook.Authors = book.Authors;            
+            existBook.Authors = book.Authors;
             existBook.Desc = book.Desc;
+            existBook.PublishedYear = book.PublishedYear;
             existBook.UpdatedDate = DateTime.UtcNow.AddHours(4);
 
             bookRepository.Commit();
