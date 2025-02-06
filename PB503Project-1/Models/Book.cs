@@ -12,7 +12,11 @@ namespace PB503Project_1.Models
         public string Desc { get; set; }
         public int PublishedYear { get; set; }
         public List<Author> Authors { get; set; }
-       
+
+
+        public bool IsBorrow {  get; set; } // false
+
+
 
     }
 }

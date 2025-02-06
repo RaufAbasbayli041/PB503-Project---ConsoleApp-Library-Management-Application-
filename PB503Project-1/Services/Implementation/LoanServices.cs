@@ -42,7 +42,7 @@ namespace PB503Project_1.Services.Implementation
                 Console.WriteLine($"loan Id - {data.Id};" +
                     $"loan Created date - {data.CreatedDate}; " +
                     $"loan updated date - {data.UpdatedDate}; " +
-                    $"loan's borrower - {data.Borrowers}");
+                    $"loan's borrower - {data.Borrowers.Id}");
             }
             return datas;
         }

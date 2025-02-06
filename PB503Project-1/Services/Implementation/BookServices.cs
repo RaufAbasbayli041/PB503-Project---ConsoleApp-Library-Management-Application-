@@ -1,10 +1,13 @@
-﻿using PB503Project_1.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PB503Project_1.DataBase;
+using PB503Project_1.Models;
 using PB503Project_1.MyExceptions;
 using PB503Project_1.Repository.Implementations;
 using PB503Project_1.Repository.Interface;
 using PB503Project_1.Services.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,29 +19,15 @@ namespace PB503Project_1.Services.Implementation
     {
         public void CreateBook(Book book)
         {
+
             if (book is null) throw new NullExceptions("book cannot be null");
 
             if (string.IsNullOrWhiteSpace(book.Title)) throw new NullExceptions("book cannot be null");
             if (string.IsNullOrWhiteSpace(book.Desc)) throw new NullExceptions("book cannot be null");
             if (book.PublishedYear < 0) throw new NotFound("punlished year cannot be less than 0");
-            foreach (var a in book.Desc)
-            {
-                if (!char.IsLetterOrDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
-                    
-                }
-            }
-            foreach (var a in book.Title)
-            {
-                if (!char.IsLetterOrDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
-
-                }
-            }
 
             IBookRepository bookRepository = new BookRepository();
+
             bookRepository.Create(book);
 
         }
@@ -63,8 +52,8 @@ namespace PB503Project_1.Services.Implementation
                 Console.WriteLine($"Book Id - {data.Id};" +
                     $"Book title - {data.Title};" +
                     $"book descriotion - {data.Desc};" +
-                    $"book Created date - {data.CreatedDate}; " +
-                    $"book updated date - {data.UpdatedDate}; " +
+                    //$"book Created date - {data.CreatedDate}; " +
+                    //$"book updated date - {data.UpdatedDate}; " +
                     $"published year - {data.PublishedYear};" +
                     $"author - {data.Authors}");
             }
@@ -114,5 +103,63 @@ namespace PB503Project_1.Services.Implementation
 
             bookRepository.Commit();
         }
+
+        public Book GetMaxBorrowedBook (List<Book> books)
+        {
+            Book wantedBook = new Book();
+
+            foreach (var book in GetAllBooks().Max(x=>x.IsBorrow == true)))
+            {
+
+            }
+
+        }
+
+
+
+        //public List<Book> FilterBooksByTitle(string title)
+        //{
+        //    IBookRepository bookRepository = new BookRepository();
+        //    if (string.IsNullOrWhiteSpace(title)) throw new NullExceptions("title cannot be null");
+        //    if (title is null) throw new NullExceptions("book cannot be null");
+
+        //    List<Book> wantedBooks = new List<Book>();
+        //    foreach (Book book in bookRepository.GetAll())
+        //    {
+        //        if (book.Title.ToLower().Contains(book.Title.ToLower()))
+        //        {
+        //            wantedBooks.Add(book);
+        //        }
+        //    }
+
+        //    foreach (var data in wantedBooks)
+        //    {
+        //        Console.WriteLine($"Book Id - {data.Id};" +
+        //            $"Book title - {data.Title};" +
+        //            $"book descriotion - {data.Desc};" +
+        //            $"book Created date - {data.CreatedDate}; " +
+        //            $"book updated date - {data.UpdatedDate}; " +
+        //            $"published year - {data.PublishedYear};" +
+        //            $"author - {data.Authors}");
+        //    }
+
+        //    return wantedBooks;
+        //}
+        //public void FilterBookByAuthors(string authorName)
+        //{
+        //    IAuthorRepository authorRepository = new AuthorRepository();
+        //    if (string.IsNullOrWhiteSpace(authorName)) throw new NullExceptions("title cannot be null");
+        //    if (authorName is null) throw new NullExceptions("book cannot be null");
+
+        //    foreach (var item in authorName.Split(','))
+        //    {
+        //        if (authorName.Contains(item.ToLower().ToUpper()))
+        //        {
+        //            //authorRepository.GetAll().Where(x => x.Name == authorName).Select(x => x.Books).ToList();
+        //            //   authorRepository.GetAllByInclude().Select(x => x.Name).Where(x=>x.)
+        //        }
+        //    }
+        //}
+
     }
 }

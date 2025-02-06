@@ -20,13 +20,16 @@ namespace PB503Project_1.Repository.Implementations
         }
         public List<Loan> GetAllByInclude()
         {
-            return _appDbContext.Loans.Include(x => x.Borrowers).Include(x => x.LoanItems).ToList();
+            return _appDbContext.Loans.Where(x=>!x.IsDeleted)
+                .Include(x=>x.Borrowers)
+                .ToList();
         }
 
         public Loan? GetByIdInclude(int id)
         {
-            var data = _appDbContext.Loans.Include(x => x.Borrowers).Include(x => x.LoanItems).FirstOrDefault(x=>x.Id == id);
-            return data;
+            return _appDbContext.Loans.Where(x => !x.IsDeleted)
+                .Include(x => x.Borrowers)
+                .FirstOrDefault(x=>x.Id == id);
         }
     }
 }

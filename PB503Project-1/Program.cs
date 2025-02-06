@@ -16,15 +16,17 @@ namespace PB503Project_1
     {
         static void Main(string[] args)
         {
+            Author author = new Author();
             bool Menu = true;
             do
             {
 
                 Console.WriteLine(@"
-1 - Author actions.
-2 - Book Actions.
-3 - Borrower Actions");
-                Console.WriteLine();
+            1 - Author actions.
+            2 - Book Actions.
+            3 - Borrower Actions
+            4 - BorrowBook");
+
                 string inputMenu = Console.ReadLine();
                 Console.Clear();
                 switch (inputMenu)
@@ -34,16 +36,16 @@ namespace PB503Project_1
                         break;
                     case "1":
                     AuthorMenu:
-                        Console.Clear();
+
                         Console.WriteLine(@"Author menu:
-1 - Butun authorlarin siyahisi
-2 - Author yaratmaq
-3 - Author editlemek
-4 - Author silmek
-0 - Exit ");
+            1 - Butun authorlarin siyahisi
+            2 - Author yaratmaq
+            3 - Author editlemek
+            4 - Author silmek
+            0 - Exit ");
                         AuthorServices authorServices = new AuthorServices();
                         string inputAuthorMenu = Console.ReadLine();
-                        Author author = new Author();
+
                         Console.Clear();
                         switch (inputAuthorMenu)
                         {
@@ -163,18 +165,17 @@ namespace PB503Project_1
 
                     case "2":
                     BookMenu:
-                        Console.Clear();
+
                         Console.WriteLine(@"Book menu:
-1 - Butun booklarin siyahisi
-2 - Book yaratmaq
-3 - Book editlemek
-4 - Book silmek
-0 - Exit ");
-                        Console.Clear();
+            1 - Butun booklarin siyahisi
+            2 - Book yaratmaq
+            3 - Book editlemek
+            4 - Book silmek
+            0 - Exit ");
                         BookServices bookServices = new BookServices();
                         string inputBookMenu = Console.ReadLine();
                         Book book = new Book();
-
+                        Console.Clear();
                         switch (inputBookMenu)
                         {
                             case "0":
@@ -204,6 +205,31 @@ namespace PB503Project_1
                                         goto publishedyear;
                                     }
 
+                                    author.Id = Convert.ToInt32(Console.ReadLine());
+
+
+                                isBorrowBook:
+                                    Console.WriteLine(@"book is borrowed:
+            1 - Yes
+            2 - No");
+                                    string IsBorrow = Console.ReadLine();
+                                    if (IsBorrow == "1")
+                                    {
+                                        book.IsBorrow = true;
+
+                                    }
+                                    else if (IsBorrow == "2")
+                                    {
+                                        book.IsBorrow = false;
+
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("enter again");
+                                        goto isBorrowBook;
+                                    }
+
+
                                     bookServices.CreateBook(book);
                                 }
                                 catch (NullExceptions ex)
@@ -223,15 +249,15 @@ namespace PB503Project_1
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex.Message);
+                                    Console.WriteLine("salam");
                                     goto BookCreate;
                                 }
                                 goto BookMenu;
                             case "3":
                             BookUpdate:
-                                bookServices.GetAllBooks();
                                 try
                                 {
+                                    bookServices.GetAllBooks();
                                     Console.WriteLine("enter updated book's id");
                                     var updateabook = int.TryParse(Console.ReadLine(), out int updatedBooksId);
                                     book.Id = updatedBooksId;
@@ -305,9 +331,10 @@ namespace PB503Project_1
                                 {
                                     Console.WriteLine(ex.Message);
                                     goto BookDelete;
-                                }                               
+                                }
                                 catch (Exception)
                                 {
+
                                     Console.WriteLine("incorrect format");
                                     goto BookDelete;
                                 }
@@ -322,16 +349,16 @@ namespace PB503Project_1
                     BorrowerMenu:
                         Console.Clear();
                         Console.WriteLine(@"Borrower menu:
-1 - Butun Borrowerlarin siyahisi
-2 - Borrower yaratmaq
-3 - Borrower editlemek
-4 - Borrower silmek
-0 - Exit ");
-                        Console.Clear();
+            1 - Butun Borrowerlarin siyahisi
+            2 - Borrower yaratmaq
+            3 - Borrower editlemek
+            4 - Borrower silmek
+            0 - Exit ");
                         BorrowerServices borrowerServices = new BorrowerServices();
                         string inputBorrowerMenu = Console.ReadLine();
                         Borrower borrower = new Borrower();
 
+                        Console.Clear();
                         switch (inputBorrowerMenu)
                         {
                             case "0":
@@ -448,46 +475,43 @@ namespace PB503Project_1
 
                     case "4":
 
-                        Console.WriteLine("4 - BorrowBook ");
+                        BookServices bookServices1 = new BookServices();                                                   
+
+                        List<Book> books = new List<Book>();
+                        foreach (var items in bookServices1.GetAllBooks().Where(x => x.IsBorrow == true))
+                        {
+
+                            Console.WriteLine(items.Id + " not available");
+                            books.Add(items);
+                        }
+
+                        LoanServices loanServices = new LoanServices();
+
+                        Loan loan = new Loan();
+                        {
+                            loan.BorrowerId = 2;
+                        };
+
+                      loanServices.CreateLoan(loan);
 
 
+                        LoanItemServices loanItemServices = new LoanItemServices();
 
+                        loanItemServices.CreateLoanItem(new LoanItem() { LoanId = loan.Id, BookId = 2 });
 
+//                     IBorrowerRepository borrowerRepository = new BorrowerRepository();
 
-
+                        
+//                        Console.WriteLine(@"1 - borrow another book
+//2- add borrower");
+//                        string borrowBookMenu = Console.ReadLine();
+//                        if (borrowBookMenu == "2")
+//                        {
+//                            borrowerRepository.GetAllByInclude().Where(x=>x.Loans)
+//                        }
 
 
                         break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     default:
                         Console.WriteLine("enter function");
                         break;
@@ -495,20 +519,7 @@ namespace PB503Project_1
                 }
             } while (Menu);
 
-            //IBookServices bookServices = new BookServices();
-            ////bookServices.GetAllBooks();
-
-            ////bookServices.UpdateBook(7, new Book() { Title = "dddddddddddddddddddddddddddddd", Desc = "sssssssss" });
-            ////Console.WriteLine("======");
-            ////bookServices.GetAllBooks();
-
-
-            //string title = Console.ReadLine();
-            //string desc = Console.ReadLine();
-
-
-            //bookServices.CreateBook(new Book { Title = title, Desc = desc });
-
+            
 
         }
     }

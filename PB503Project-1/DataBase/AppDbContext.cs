@@ -20,5 +20,7 @@ namespace PB503Project_1.DataBase
             optionsBuilder.UseSqlServer("Server=RAUFABASBAYLI\\SQLEXPRESS;Database=PB503LibraryProject;Trusted_Connection=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
+
+        
     }
 }

@@ -19,22 +19,22 @@ namespace PB503Project_1.Services.Implementation
             if (string.IsNullOrWhiteSpace(borrower.Name)) throw new NullExceptions("borrower cannot be null");
             if (borrower.Name is null) throw new NullExceptions(" borrower cannot be null");
             if (borrower.Email is null) throw new NullExceptions(" borrower cannot be null");
-            foreach (var a in borrower.Name)
-            {
-                if (!char.IsDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
+            //foreach (var a in borrower.Name)
+            //{
+            //    if (!char.IsDigit(a))
+            //    {
+            //        throw new InvalidException("incorrect format");
 
-                }
-            }
-            foreach (var a in borrower.Email)
-            {
-                if (!char.IsLetterOrDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
+            //    }
+            //}
+            //foreach (var a in borrower.Email)
+            //{
+            //    if (!char.IsLetterOrDigit(a))
+            //    {
+            //        throw new InvalidException("incorrect format");
 
-                }
-            }
+            //    }
+            //}
          
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
             borrowerRepository.Create(borrower);
@@ -46,9 +46,9 @@ namespace PB503Project_1.Services.Implementation
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
             var data = borrowerRepository.GetById(id);
             if (data is null) throw new NotFound("borrower not found");
+            if (data.IsDeleted is true) throw new DeletedException("borrower has deleted");
             borrowerRepository.Delete(data);
             borrowerRepository.Commit();
-            if (data.IsDeleted is true) throw new DeletedException("borrower has deleted");
         }
 
         public List<Borrower> GetAllBorrowers()
@@ -60,8 +60,8 @@ namespace PB503Project_1.Services.Implementation
                 Console.WriteLine($"Borrower Id - {data.Id};" +
                     $"borrower name - {data.Name}" +
                     $"borrower email - {data.Email};" +
-                    $"borrowe Created date - {data.CreatedDate}; " +
-                    $"borrower updated date - {data.UpdatedDate}; " +
+                    //$"borrowe Created date - {data.CreatedDate}; " +
+                    //$"borrower updated date - {data.UpdatedDate}; " +
                     $"borrower's loan name - {data.Loans}                    ");
             }
             return datas;
@@ -81,22 +81,22 @@ namespace PB503Project_1.Services.Implementation
             if (string.IsNullOrWhiteSpace(borrower.Name)) throw new NullExceptions("borrower cannot be null");
             if (borrower.Name is null) throw new NullExceptions(" borrower cannot be null");
             if (borrower.Email is null) throw new NullExceptions(" borrower cannot be null");
-            foreach (var a in borrower.Name)
-            {
-                if (!char.IsDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
+            //foreach (var a in borrower.Name)
+            //{
+            //    if (!char.IsDigit(a))
+            //    {
+            //        throw new InvalidException("incorrect format");
 
-                }
-            }
-            foreach (var a in borrower.Email)
-            {
-                if (!char.IsLetterOrDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
+            //    }
+            //}
+            //foreach (var a in borrower.Email)
+            //{
+            //    if (!char.IsLetterOrDigit(a))
+            //    {
+            //        throw new InvalidException("incorrect format");
 
-                }
-            }
+            //    }
+            //}
 
 
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
@@ -105,6 +105,7 @@ namespace PB503Project_1.Services.Implementation
             existBorrower.Name = borrower.Name;
             existBorrower.Email = borrower.Email;
             existBorrower.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
             borrowerRepository.Commit();
 
         }

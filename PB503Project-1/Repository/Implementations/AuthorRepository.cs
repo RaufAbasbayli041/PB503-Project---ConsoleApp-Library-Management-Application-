@@ -20,13 +20,17 @@ namespace PB503Project_1.Repository.Implementations
         }
         public List<Author> GetAllByInclude()
         {
-            return _appDbContext.Authors.Include(x => x.Books).ToList();
+            return _appDbContext.Authors.Where(x => !x.IsDeleted)
+                                        .Include(x=>x.Books)
+                                        .ToList();
         }
 
         public Author? GetByIdInclude(int id)
         {
-            var data =  _appDbContext.Authors.Include(x => x.Books).FirstOrDefault(x => x.Id == id);
-            return data;
+            return _appDbContext.Authors.Where(x => !x.IsDeleted)
+                                        .Include(x => x.Books)
+                                        .FirstOrDefault(x => x.Id == id);
+            
         }
     }
 }

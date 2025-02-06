@@ -13,6 +13,7 @@ namespace PB503Project_1.Repository.Implementations
     public class BookRepository : GenericRepostory<Book>, IBookRepository
     {
         private readonly AppDbContext _appDbContext;
+        internal object _context;
 
         public BookRepository()
         {
@@ -21,13 +22,16 @@ namespace PB503Project_1.Repository.Implementations
 
         public Book? GetByIdInclude(int id)
         {
-            var data = _appDbContext.Books.Include(x => x.Authors).FirstOrDefault(x=> x.Id == id);  
-            return data;
+            return _appDbContext.Books.Where(x => !x.IsDeleted)
+                                    .Include(x => x.Authors)
+                                    .FirstOrDefault(x=>x.Id ==id);
         }
 
         public List<Book> GetAllByInclude()
         {
-           return _appDbContext.Books.Include(x=>x.Authors).ToList();
+           return _appDbContext.Books.Where(x=>!x.IsDeleted)
+                                     .Include(x=>x.Authors)
+                                     .ToList();
         }
     }
 }

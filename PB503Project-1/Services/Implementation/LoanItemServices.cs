@@ -18,6 +18,8 @@ namespace PB503Project_1.Services.Implementation
             if (loanItem is null) throw new NullExceptions("loan item cannot be null");
             ILoanItemRepository loanItemRepository = new LoanItemRepository();
             loanItemRepository.Create(loanItem);
+
+            loanItemRepository.Commit();
            
         }
 
@@ -27,9 +29,9 @@ namespace PB503Project_1.Services.Implementation
             ILoanItemRepository loanItemRepository = new LoanItemRepository();
             var data = loanItemRepository.GetById(id);
             if (data is null) throw new NotFound("loan item not found");
+            if (data.IsDeleted is true) throw new DeletedException("loan item has deleted");
             loanItemRepository.Delete(data);
             loanItemRepository.Commit();
-            if (data.IsDeleted is true) throw new DeletedException("loan item has deleted");
         }
 
         public List<LoanItem> GetAllLoanItems()

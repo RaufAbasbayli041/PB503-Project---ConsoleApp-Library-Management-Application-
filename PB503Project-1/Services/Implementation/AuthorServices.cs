@@ -27,7 +27,10 @@ namespace PB503Project_1.Services.Implementation
                 }
             }
 
+
             IAuthorRepository authorRepository = new AuthorRepository();
+           
+
             authorRepository.Create(author);
 
         }
@@ -53,9 +56,10 @@ namespace PB503Project_1.Services.Implementation
             {
                 Console.WriteLine($"Author Id - {data.Id}; " +
                     $"Author name - {data.Name};" +
-                    $"author books - {data.Books}" +
-                    $"author Created date - {data.CreatedDate};" +
-                    $"author updated date - {data.UpdatedDate};") ;
+                    $"author books - {data.Books}"); 
+                    //$"author Created date - {data.CreatedDate};" +
+                    //$"author updated date - {data.UpdatedDate};") 
+                    //;
             }
             return datas;
         }
@@ -89,9 +93,8 @@ namespace PB503Project_1.Services.Implementation
             existAuthor.Name = author.Name;
             existAuthor.UpdatedDate = DateTime.UtcNow.AddHours(4);
             authorRepository.Commit();
-
-
-
         }
+
+       
     }
 }
