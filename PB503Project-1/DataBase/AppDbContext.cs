@@ -15,6 +15,7 @@ namespace PB503Project_1.DataBase
         public DbSet<Borrower> Borrowers { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<LoanItem> LoanItems { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=RAUFABASBAYLI\\SQLEXPRESS;Database=PB503LibraryProject;Trusted_Connection=True;TrustServerCertificate=True");

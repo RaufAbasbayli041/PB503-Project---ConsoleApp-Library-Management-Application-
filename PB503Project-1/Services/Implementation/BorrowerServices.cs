@@ -35,7 +35,7 @@ namespace PB503Project_1.Services.Implementation
 
             //    }
             //}
-         
+
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
             borrowerRepository.Create(borrower);
         }
@@ -62,8 +62,11 @@ namespace PB503Project_1.Services.Implementation
                     $"borrower email - {data.Email};" +
                     //$"borrowe Created date - {data.CreatedDate}; " +
                     //$"borrower updated date - {data.UpdatedDate}; " +
-                    $"borrower's loan name - {data.Loans}                    ");
+                    $"borrower's loan name - {data.Loans}");
+                
             }
+            datas.Where(x => !x.IsDeleted).ToList();
+
             return datas;
         }
 
@@ -71,7 +74,10 @@ namespace PB503Project_1.Services.Implementation
         {
             if (id < 0) throw new NotFound("borrower not found");
             IBorrowerRepository borrowerRepository = new BorrowerRepository();
-            return borrowerRepository.GetById(id);
+            var data = borrowerRepository.GetById(id);
+            if (data.IsDeleted is true) throw new DeletedException("borrower has deleted");
+           
+            return data;
         }
 
         public void UpdateBorrower(int id, Borrower borrower)

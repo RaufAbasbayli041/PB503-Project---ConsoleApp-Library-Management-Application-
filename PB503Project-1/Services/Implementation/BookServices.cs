@@ -27,7 +27,9 @@ namespace PB503Project_1.Services.Implementation
             if (book.PublishedYear < 0) throw new NotFound("punlished year cannot be less than 0");
 
             IBookRepository bookRepository = new BookRepository();
-
+            // author table-a author id add kodu 
+            //var authors = bookRepository._appDbContext.Authors
+            //    .Where(x=>book.Authors.));
             bookRepository.Create(book);
 
         }
@@ -54,9 +56,10 @@ namespace PB503Project_1.Services.Implementation
                     $"book descriotion - {data.Desc};" +
                     //$"book Created date - {data.CreatedDate}; " +
                     //$"book updated date - {data.UpdatedDate}; " +
-                    $"published year - {data.PublishedYear};" +
-                    $"author - {data.Authors}");
+                    $"published year - {data.PublishedYear};");
+
             }
+            datas.Where(x => !x.IsDeleted).ToList();
             return datas;
 
         }
@@ -65,6 +68,7 @@ namespace PB503Project_1.Services.Implementation
         {
             if (id < 0) throw new NotFound("book not found");
             IBookRepository bookRepository = new BookRepository();
+
             return bookRepository.GetById(id);
         }
 
@@ -96,7 +100,6 @@ namespace PB503Project_1.Services.Implementation
             var existBook = bookRepository.GetById(id);
             if (existBook is null) throw new NullExceptions("book cannot be null");
             existBook.Title = book.Title;
-            existBook.Authors = book.Authors;
             existBook.Desc = book.Desc;
             existBook.PublishedYear = book.PublishedYear;
             existBook.UpdatedDate = DateTime.UtcNow.AddHours(4);
@@ -104,62 +107,27 @@ namespace PB503Project_1.Services.Implementation
             bookRepository.Commit();
         }
 
-        public Book GetMaxBorrowedBook (List<Book> books)
+        public List<Book> FilterBooksByTitle(string title)
         {
-            Book wantedBook = new Book();
+            IBookRepository bookRepository = new BookRepository();
+            if (string.IsNullOrWhiteSpace(title)) throw new NullExceptions("title cannot be null");
+            if (title is null) throw new NullExceptions("book cannot be null");
 
-            foreach (var book in GetAllBooks().Max(x=>x.IsBorrow == true)))
+            List<Book> wantedBooks = new List<Book>();
+            foreach (Book book in bookRepository.GetAll())
             {
-
+                if (book.Title.Trim().ToLower().Contains(title.Trim().ToLower()))
+                {
+                    wantedBooks.Add(book);
+                }
             }
+
+            return wantedBooks;
 
         }
 
 
 
-        //public List<Book> FilterBooksByTitle(string title)
-        //{
-        //    IBookRepository bookRepository = new BookRepository();
-        //    if (string.IsNullOrWhiteSpace(title)) throw new NullExceptions("title cannot be null");
-        //    if (title is null) throw new NullExceptions("book cannot be null");
-
-        //    List<Book> wantedBooks = new List<Book>();
-        //    foreach (Book book in bookRepository.GetAll())
-        //    {
-        //        if (book.Title.ToLower().Contains(book.Title.ToLower()))
-        //        {
-        //            wantedBooks.Add(book);
-        //        }
-        //    }
-
-        //    foreach (var data in wantedBooks)
-        //    {
-        //        Console.WriteLine($"Book Id - {data.Id};" +
-        //            $"Book title - {data.Title};" +
-        //            $"book descriotion - {data.Desc};" +
-        //            $"book Created date - {data.CreatedDate}; " +
-        //            $"book updated date - {data.UpdatedDate}; " +
-        //            $"published year - {data.PublishedYear};" +
-        //            $"author - {data.Authors}");
-        //    }
-
-        //    return wantedBooks;
-        //}
-        //public void FilterBookByAuthors(string authorName)
-        //{
-        //    IAuthorRepository authorRepository = new AuthorRepository();
-        //    if (string.IsNullOrWhiteSpace(authorName)) throw new NullExceptions("title cannot be null");
-        //    if (authorName is null) throw new NullExceptions("book cannot be null");
-
-        //    foreach (var item in authorName.Split(','))
-        //    {
-        //        if (authorName.Contains(item.ToLower().ToUpper()))
-        //        {
-        //            //authorRepository.GetAll().Where(x => x.Name == authorName).Select(x => x.Books).ToList();
-        //            //   authorRepository.GetAllByInclude().Select(x => x.Name).Where(x=>x.)
-        //        }
-        //    }
-        //}
 
     }
 }

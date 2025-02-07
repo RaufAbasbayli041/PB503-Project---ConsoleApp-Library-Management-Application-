@@ -17,6 +17,8 @@ namespace PB503Project_1.Services.Implementation
         {
             if (loanItem is null) throw new NullExceptions("loan item cannot be null");
             ILoanItemRepository loanItemRepository = new LoanItemRepository();
+
+            
             loanItemRepository.Create(loanItem);
 
             loanItemRepository.Commit();
@@ -37,6 +39,19 @@ namespace PB503Project_1.Services.Implementation
         public List<LoanItem> GetAllLoanItems()
         {
             ILoanItemRepository loanItemRepository = new LoanItemRepository();
+
+
+            var datas = loanItemRepository.GetAll();
+            foreach (var data in datas)
+            {
+                Console.WriteLine($"loan item Id - {data.Id};" +                    
+                    //$"borrowe Created date - {data.CreatedDate}; " +
+                    //$"borrower updated date - {data.UpdatedDate}; " +
+                    $"loan item's book id - {data.BookId}" +
+                    $"loan item's book title - {data.Book.Title}");
+
+            }
+            datas.Where(x => !x.IsDeleted).ToList();
             return loanItemRepository.GetAll();
         }
 
@@ -44,6 +59,7 @@ namespace PB503Project_1.Services.Implementation
         {
             if (id < 0) throw new NotFound("loan item not found");
             ILoanItemRepository loanItemRepository = new LoanItemRepository();
+
            return loanItemRepository.GetById(id);
         }
 

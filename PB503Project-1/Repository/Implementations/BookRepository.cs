@@ -12,9 +12,8 @@ namespace PB503Project_1.Repository.Implementations
 {
     public class BookRepository : GenericRepostory<Book>, IBookRepository
     {
-        private readonly AppDbContext _appDbContext;
-        internal object _context;
-
+        public readonly AppDbContext _appDbContext;
+        
         public BookRepository()
         {
             _appDbContext = new AppDbContext();

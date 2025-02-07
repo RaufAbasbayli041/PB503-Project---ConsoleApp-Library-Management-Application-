@@ -18,14 +18,7 @@ namespace PB503Project_1.Services.Implementation
 
             if (author is null) throw new NullExceptions("author cannot be null");
             if (string.IsNullOrWhiteSpace(author.Name)) throw new NullExceptions("author name cannot be null");
-            foreach (var a in author.Name)
-            {
-                if (!char.IsDigit(a))
-                {
-                    throw new InvalidException("incorrect format");
-
-                }
-            }
+           
 
 
             IAuthorRepository authorRepository = new AuthorRepository();
@@ -95,6 +88,20 @@ namespace PB503Project_1.Services.Implementation
             authorRepository.Commit();
         }
 
-       
+        public List<Author> FilterBookByAuthors(string authorName)
+        {
+            IAuthorRepository authorRepository = new AuthorRepository();
+            if (string.IsNullOrWhiteSpace(authorName)) throw new NullExceptions("author name cannot be null");
+            if (authorName is null) throw new NullExceptions("author cannot be null");
+            List<Author> authorList = new List<Author>();
+            foreach (var item in authorRepository.GetAll())
+            {
+                if (item.Name.Trim().ToLower().Contains(authorName.Trim().ToLower()))
+                {
+                    authorList.Add(item);
+                }
+            }
+            return authorList;
+        }
     }
 }

@@ -5,6 +5,7 @@ using PB503Project_1.Repository.Implementations;
 using PB503Project_1.Repository.Interface;
 using PB503Project_1.Services.Implementation;
 using PB503Project_1.Services.Interface;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Runtime.CompilerServices;
@@ -17,15 +18,22 @@ namespace PB503Project_1
         static void Main(string[] args)
         {
             Author author = new Author();
+                     AuthorsBooks authorsBooks = new AuthorsBooks();
             bool Menu = true;
             do
-            {
-
+            {               
                 Console.WriteLine(@"
             1 - Author actions.
             2 - Book Actions.
             3 - Borrower Actions
-            4 - BorrowBook");
+            4 - BorrowBook
+            5 - ReturnBook
+            6 - En cox borrow olunan kitabi getirin
+            7 - Kitabi gecikdiren Borrowerlerin listi gelsin
+            8 - Hansi borrower indiye qeder hansi kitablari borrow edib onlar gelsin                      
+            9 - FilterBooksByTitle(string title)                     
+            10 - FilterBooksByAuthor(string authorName)            
+            0 - Exit");
 
                 string inputMenu = Console.ReadLine();
                 Console.Clear();
@@ -36,7 +44,6 @@ namespace PB503Project_1
                         break;
                     case "1":
                     AuthorMenu:
-
                         Console.WriteLine(@"Author menu:
             1 - Butun authorlarin siyahisi
             2 - Author yaratmaq
@@ -62,6 +69,7 @@ namespace PB503Project_1
                                 {
                                     string authorName = Console.ReadLine();
                                     author.Name = authorName;
+                                                                       
                                     authorServices.CreateAuthor(author);
                                 }
                                 catch (NullExceptions ex)
@@ -160,9 +168,8 @@ namespace PB503Project_1
                             default:
                                 Console.WriteLine("enter function");
                                 goto AuthorMenu;
-                        }
-                        break;
-
+                        }                     
+break;
                     case "2":
                     BookMenu:
 
@@ -204,9 +211,7 @@ namespace PB503Project_1
                                         Console.WriteLine("false year");
                                         goto publishedyear;
                                     }
-
-                                    author.Id = Convert.ToInt32(Console.ReadLine());
-
+                                    
 
                                 isBorrowBook:
                                     Console.WriteLine(@"book is borrowed:
@@ -474,44 +479,163 @@ namespace PB503Project_1
                         break;
 
                     case "4":
-
-                        BookServices bookServices1 = new BookServices();                                                   
-
-                        List<Book> books = new List<Book>();
-                        foreach (var items in bookServices1.GetAllBooks().Where(x => x.IsBorrow == true))
-                        {
-
-                            Console.WriteLine(items.Id + " not available");
-                            books.Add(items);
-                        }
-
+                        BookServices bookServices1 = new BookServices();
                         LoanServices loanServices = new LoanServices();
-
-                        Loan loan = new Loan();
-                        {
-                            loan.BorrowerId = 2;
-                        };
-
-                      loanServices.CreateLoan(loan);
-
-
                         LoanItemServices loanItemServices = new LoanItemServices();
 
-                        loanItemServices.CreateLoanItem(new LoanItem() { LoanId = loan.Id, BookId = 2 });
+                        List<Book> booksIsBorrow = new List<Book>();
+                        int wantedBookIdtoBorrow;
+                       // try
+                       // {
+                            foreach (var items in bookServices1.GetAllBooks().Where(x => x.IsBorrow == true))
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine(items.Id + " not available");
+                            }
+                            var borrowedBooksId = loanItemServices.GetAllLoanItems().Select(x => x.BookId).ToList();
 
-//                     IBorrowerRepository borrowerRepository = new BorrowerRepository();
 
+
+                            Console.WriteLine("choose book which want to borrow");
+                            wantedBookIdtoBorrow = Convert.ToInt32(Console.ReadLine());
+
+                            if (borrowedBooksId.Contains(wantedBookIdtoBorrow))
+                            {
+                                Console.WriteLine("this book is borrowed");
+                            }
+                        //}
+                        //catch (NotFound ex)
+                        //{
+                        //    Console.WriteLine(ex.Message);
+
+                        //}
+                        //catch (DeletedException ex)
+                        //{
+                        //    Console.WriteLine(ex.Message);
+
+                        //}
+                        //catch (NullExceptions ex)
+                        //{
+                        //    Console.WriteLine(ex.Message);
+
+                        //}
+                        //catch (Exception)
+                        //{
+                        //    Console.WriteLine("incorrect format");
+
+                        //}
+                        Console.WriteLine("choose borrower id");
+                        BorrowerServices borrowerServices1 = new BorrowerServices();
+                        Borrower choosenBorrower = new Borrower();
+                        var borrowers = borrowerServices1.GetAllBorrowers();
+
+                        int borrowerId = Convert.ToInt32(Console.ReadLine());
+                        choosenBorrower = borrowerServices1.GetBorrowerById(borrowerId);
+
+                        Console.WriteLine("choose borrower's loans id");
+                        int borrowerLoan = Convert.ToInt32(Console.ReadLine());
+                        Loan loan = new Loan();
+                        {
+                            loan.BorrowerId = borrowerLoan;
+                        };
+                        loanServices.CreateLoan(loan);
+
+                       
+
+                        LoanItem loanItem = new LoanItem()
+                        {
+                            LoanId = loan.Id,
+                            BookId = booksIsBorrow.FirstOrDefault(x => x.Id == wantedBookIdtoBorrow).Id
+                        };
+
+
+                        loanItemServices.CreateLoanItem(loanItem);
+
+                        Console.WriteLine(@"choose next:
+1 - Borrow book;
+2 - Add borrower");
+                        break;
+
+                    case "9":
+                        FilterBookByTitle:
+                        BookServices bookServices2 = new BookServices();
+                        try
+                        {
+                            Console.WriteLine("enter book title");
+                            string WantedBookTitle = Console.ReadLine();
+                            var datas = bookServices2.FilterBooksByTitle(WantedBookTitle);
+
+                            foreach (var data in datas)
+                            {
+                                Console.WriteLine(data.Id + " " + data.Title);
+                            }
+                        }
+                        catch (NotFound ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            goto FilterBookByTitle;
+                        }
+                        catch (DeletedException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            goto FilterBookByTitle;
+
+                        }
+                        catch (NullExceptions ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            goto FilterBookByTitle;
+
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("incorrect format");
+                            goto FilterBookByTitle;
+                        }
+                        break ;
                         
-//                        Console.WriteLine(@"1 - borrow another book
-//2- add borrower");
-//                        string borrowBookMenu = Console.ReadLine();
-//                        if (borrowBookMenu == "2")
-//                        {
-//                            borrowerRepository.GetAllByInclude().Where(x=>x.Loans)
-//                        }
+
+                        case "10":
+
+                        AuthorServices authorServices2 = new AuthorServices();
+                        try
+                        {
+                            Console.WriteLine("author name");
+                            string WantedAuthorName = Console.ReadLine();
+                            var datas = authorServices2.FilterBookByAuthors(WantedAuthorName);
+
+                            foreach (var data in datas)
+                            {
+                                Console.WriteLine(data.Id + " " + data);
+                            }
+                        }
+                        catch (NotFound ex)
+                        {
+                            Console.WriteLine(ex.Message);
+
+                        }
+                        catch (DeletedException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+
+                        }
+                        catch (NullExceptions ex)
+                        {
+                            Console.WriteLine(ex.Message);
+
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("incorrect format");
+
+                        }
+
 
 
                         break;
+
+
+
                     default:
                         Console.WriteLine("enter function");
                         break;
@@ -519,7 +643,7 @@ namespace PB503Project_1
                 }
             } while (Menu);
 
-            
+
 
         }
     }
